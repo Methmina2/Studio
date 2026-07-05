@@ -144,19 +144,6 @@ const HomePage = () => {
         <div className="homepage-spot homepage-spot-c" />
       </div>
 
-      <div
-        className="relative flex items-center justify-center border-b md:border-b-0 md:border-r border-zinc-800 bg-absolute-black overflow-hidden basis-[10%] md:basis-1/5 shrink-0 grow-0 pt-6 md:pt-0"
-        data-aos="fade-in"
-        data-aos-duration="800"
-        data-aos-easing="ease-out"
-      >
-        <img
-          src="/images/hotmello.png"
-          alt="HOTMELLO"
-          className="w-auto h-8 md:h-14 lg:h-20 max-h-20 md:max-h-[80px] lg:max-h-[120px] object-contain"
-        />
-      </div>
-
       {isLoaded && cards.length > 0 ? cards.map((service, index) => {
         const direction = index % 2 === 0 ? 'fade-down' : 'fade-up';
         const entranceClass = index % 2 === 0 ? 'card-entrance-down' : 'card-entrance-up';
@@ -190,10 +177,9 @@ const HomePage = () => {
             />
             <div className="absolute inset-0 bg-black/55 group-hover:bg-black/30 transition-colors duration-500" />
             <div className="absolute inset-x-6 bottom-4 sm:bottom-6 z-10 text-center">
-              <h2 className="card-title text-white text-base sm:text-lg md:text-xl lg:text-2xl uppercase tracking-[0.24em] drop-shadow-[0_12px_48px_rgba(0,0,0,0.35)]" style={{ color: isHovered ? (service.colorKey === 'weddings' ? 'var(--accent-wedding)' : service.colorKey === 'rentals' ? 'var(--accent-rentals)' : service.colorKey === 'studio' ? 'var(--accent-studio)' : 'var(--accent-production)') : '#ffffff', transform: isHovered ? 'translateY(-12px) skewX(-0.01turn)' : 'translateY(0)', transition: 'transform 0.35s ease, color 0.35s ease' }}>
+              <h2 className="card-title text-white text-base sm:text-lg md:text-xl lg:text-2xl uppercase tracking-[0.24em] drop-shadow-[0_12px_48px_rgba(0,0,0,0.35)]" style={{ color: '#ffffff', transform: isHovered ? 'translateY(-12px) skewX(-0.01turn)' : 'translateY(0)', transition: 'transform 0.35s ease, color 0.35s ease' }}>
                 {service.title.toUpperCase()}
               </h2>
-              <p className="card-subtitle">{cardTagline[service.title]}</p>
             </div>
           </Link>
         );
