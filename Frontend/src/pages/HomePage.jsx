@@ -11,21 +11,25 @@ const defaultServiceData = {
     image: '/images/event.png',
     enquireLink: '/production',
     colorKey: 'events',
+    title: 'Hotmello Productions',
   },
   wedding: {
     image: '/images/wedding.png',
     enquireLink: '/wedding',
     colorKey: 'weddings',
+    title: 'Hotmello Weddings',
   },
   rentals: {
     image: '/images/rental-camara.png',
     enquireLink: '/rentals',
     colorKey: 'rentals',
+    title: 'Hotmello Rental',
   },
   studiolabs: {
     image: '/images/studio.png',
     enquireLink: '/studiolabs',
     colorKey: 'studio',
+    title: 'Hotmello Lab',
   },
 };
 
@@ -69,6 +73,7 @@ const HomePage = () => {
             : defaults.image;
           return {
             ...service,
+            title: service.title || defaults.title || 'Service',
             image: imageUrl,
             enquireLink: service.enquireLink || defaults.enquireLink,
             colorKey: service.colorKey || defaults.colorKey,
@@ -91,24 +96,24 @@ const HomePage = () => {
   const cards = services.length ? services.slice(0, 4) : [];
 
   const cardTagline = {
-    Production: 'LIVE CINEMA',
-    Wedding: 'ROMANCE STAGE',
-    'Camera Rentals': 'TECH GEAR',
-    'Studio Rentals': 'CREATIVE LAB',
+    events: 'LIVE CINEMA',
+    weddings: 'ROMANCE STAGE',
+    rentals: 'TECH GEAR',
+    studio: 'CREATIVE LAB',
   };
   const hoverAccentMap = {
-    Production: 'rgba(222,102,14,0.22)',
-    Wedding: 'rgba(130,230,73,0.22)',
-    'Camera Rentals': 'rgba(0,255,255,0.22)',
-    'Studio Rentals': 'rgba(128,0,128,0.22)',
+    events: 'rgba(222,102,14,0.22)',
+    weddings: 'rgba(130,230,73,0.22)',
+    rentals: 'rgba(0,255,255,0.22)',
+    studio: 'rgba(128,0,128,0.22)',
   };
   const cardAccentMap = {
-    Production: 'rgba(222,102,14,0.55)',
-    Wedding: 'rgba(130,230,73,0.55)',
-    'Camera Rentals': 'rgba(0,255,255,0.55)',
-    'Studio Rentals': 'rgba(128,0,128,0.55)',
+    events: 'rgba(222,102,14,0.55)',
+    weddings: 'rgba(130,230,73,0.55)',
+    rentals: 'rgba(0,255,255,0.55)',
+    studio: 'rgba(128,0,128,0.55)',
   };
-  const currentHoverAccent = hovered === null ? 'rgba(255,255,255,0.04)' : hoverAccentMap[cards[hovered]?.title] || 'rgba(255,255,255,0.04)';
+  const currentHoverAccent = hovered === null ? 'rgba(255,255,255,0.04)' : hoverAccentMap[cards[hovered]?.colorKey] || 'rgba(255,255,255,0.04)';
 
   return (
     <div
@@ -165,7 +170,7 @@ const HomePage = () => {
             style={{
               flex: hovered === null ? 1 : hovered === index ? 1.5 : 0.83,
               transition: 'flex 0.5s cubic-bezier(.2,.9,.2,1)',
-              '--accent-color': cardAccentMap[service.title] || 'rgba(255,255,255,0.55)',
+              '--accent-color': cardAccentMap[service.colorKey] || 'rgba(255,255,255,0.55)',
               '--card-delay': `${index * 0.08}s`,
             }}
           >

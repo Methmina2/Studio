@@ -17,6 +17,19 @@
   }
 }
 
+/* Fonarto Regular - local font files in public/fonts */
+@font-face {
+  font-family: 'Fonarto';
+  src: url('/fonts/Fonarto.woff2') format('woff2'), url('/fonts/Fonarto.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.fonarto {
+  font-family: 'Fonarto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 .hero {
   position: relative;
 

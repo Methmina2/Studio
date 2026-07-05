@@ -16,6 +16,7 @@ const Navbar = () => {
   const bgClass = isHome && !isScrolled ? 'bg-transparent' : 'bg-black/90 backdrop-blur-sm shadow-md';
   const servicesLabel = 'Services'; // change this string to rename the Services label
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const servicesRef = useRef(null);
   useEffect(() => {
     const handleOutside = (e) => {
@@ -35,22 +36,21 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${bgClass}`}>
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center min-h-[56px] sm:min-h-[64px] md:h-20">
-          {/* Logo – hidden on home page, hidden on mobile, visible on desktop for other pages */}
+          {/* Logo / Brand link on the far left */}
           <Link
             to="/"
-            className={`font-serif text-2xl font-bold text-white tracking-wide hover:text-[#de660e] transition ${
-              isHome ? 'hidden' : 'hidden md:block'
-            }`}
+            className={`fonarto text-2xl font-normal text-white tracking-wide hover:text-[#de660e] transition`}
+            aria-label="Hotmello Home"
           >
             HOTMELLO
           </Link>
 
-          {/* Navigation links – always visible, wrap on mobile */}
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-6 lg:gap-8 flex-wrap">
+          {/* Desktop navigation links (hidden on small screens) */}
+          <div className="hidden md:flex items-center gap-2 sm:gap-3 md:gap-6 lg:gap-8">
             <Link to="/" className="text-white/80 hover:text-[#de660e] transition font-sans text-[11px] sm:text-xs md:text-sm uppercase tracking-wider whitespace-nowrap">
               Home
             </Link>
-            {/* Services dropdown (clickable on mobile, hover on desktop) */}
+            {/* Services dropdown (hover on desktop) */}
             <div
               className="relative"
               ref={servicesRef}
@@ -92,10 +92,26 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileOpen((s) => !s)}
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white/90 hover:text-[#de660e] transition"
+            aria-expanded={mobileOpen}
+            aria-label="Toggle menu"
+          >
+            <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
 
           {/* CTA Button – only on home page */}
           {isHome && (
-            <div className="flex items-center">
+            <div className="hidden md:flex items-center">
               <Link
                 to="/booking"
                 className="bg-[#de660e] text-black font-semibold text-[10px] sm:text-xs md:text-sm px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 rounded-full hover:bg-[#ff7f2c] transition-all duration-300 hover:scale-105 whitespace-nowrap"
@@ -104,6 +120,33 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+        </div>
+      </div>
+      {/* Mobile menu panel */}
+      <div className={`md:hidden absolute left-0 right-0 top-full z-40 bg-black/95 border-t border-white/10 transition-transform duration-200 ${mobileOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0 pointer-events-none'}`}>
+          <div className="px-4 py-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <Link to="/" onClick={() => setMobileOpen(false)} className="block text-white/90 hover:text-[#de660e] uppercase tracking-wider font-sans">
+              Home
+            </Link>
+            <Link to="/booking" onClick={() => setMobileOpen(false)} className="inline-block bg-[#de660e] text-black text-center font-semibold px-3 py-1 rounded-full text-sm">
+              Book Now
+            </Link>
+          </div>
+
+          <div className="border-t border-white/6 pt-2">
+            {servicesData.map((s) => (
+              <Link key={s.id} to={s.enquireLink} onClick={() => setMobileOpen(false)} className="block px-2 py-2 text-white/80 hover:text-[#de660e]">
+                {s.icon} {s.title}
+              </Link>
+            ))}
+          </div>
+          <Link to="/about" onClick={() => setMobileOpen(false)} className="block text-white/90 hover:text-[#de660e] uppercase tracking-wider font-sans">
+            Crew
+          </Link>
+          <Link to="/contact" onClick={() => setMobileOpen(false)} className="block text-white/90 hover:text-[#de660e] uppercase tracking-wider font-sans">
+            Contact
+          </Link>
         </div>
       </div>
     </nav>
