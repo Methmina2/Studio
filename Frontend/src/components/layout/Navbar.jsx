@@ -47,10 +47,14 @@ const Navbar = () => {
           {/* Logo / Brand link on the far left */}
           <Link
             to="/"
-            className={`fonarto text-2xl font-normal text-white tracking-wide hover:text-[#de660e] transition`}
+            className="flex items-center"
             aria-label="Hotmello Home"
           >
-            HOTMELLO
+            <img
+              src="/images/lotmello.png"
+              alt="Hotmello logo"
+              className="h-50 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop navigation links (hidden on small screens) */}
