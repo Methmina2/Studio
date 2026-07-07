@@ -128,7 +128,7 @@ const Production = () => {
               <div className="w-24 h-1" style={{ background: 'linear-gradient(90deg, var(--accent-production), #ff7f2c)' }}></div>
             </div>
             <Link
-              to="/booking?service=Production"
+              to="/booking?service=Hotmello Productions"
               className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse"
             >
               Book Now

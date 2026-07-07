@@ -48,7 +48,7 @@ const StudioLabs = () => {
               <div className="w-20 h-1" style={{ background: 'linear-gradient(90deg, var(--accent-studio), rgba(179,102,179,0.6))' }}></div>
             </div>
             <Link
-              to="/booking?service=Studio Rentals"
+              to="/booking?service=Hotmello Lab"
               className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse"
             >
               Book Now

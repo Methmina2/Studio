@@ -15,6 +15,14 @@ const Navbar = () => {
   const isHome = location.pathname === '/';
   const bgClass = isHome && !isScrolled ? 'bg-transparent' : 'bg-black/90 backdrop-blur-sm shadow-md';
   const servicesLabel = 'Services'; // change this string to rename the Services label
+
+  const servicePathToQuery = {
+    '/wedding': 'Wedding',
+    '/production': 'Production',
+    '/studiolabs': 'Studio Rentals',
+  };
+  const bookingLink = servicePathToQuery[location.pathname] ? `/booking?service=${encodeURIComponent(servicePathToQuery[location.pathname])}` : '/booking';
+
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const servicesRef = useRef(null);
@@ -129,7 +137,7 @@ const Navbar = () => {
             <Link to="/" onClick={() => setMobileOpen(false)} className="block text-white/90 hover:text-[#de660e] uppercase tracking-wider font-sans">
               Home
             </Link>
-            <Link to="/booking" onClick={() => setMobileOpen(false)} className="inline-block bg-[#de660e] text-black text-center font-semibold px-3 py-1 rounded-full text-sm">
+            <Link to={bookingLink} onClick={() => setMobileOpen(false)} className="inline-block bg-[#de660e] text-black text-center font-semibold px-3 py-1 rounded-full text-sm">
               Book Now
             </Link>
           </div>

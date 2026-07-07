@@ -24,13 +24,23 @@ const Booking = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const serviceAliasMap = {
+    Wedding: 'Hotmello Weddings',
+    Production: 'Hotmello Productions',
+    'Studio Rentals': 'Hotmello Lab',
+    'Hotmello Weddings': 'Hotmello Weddings',
+    'Hotmello Productions': 'Hotmello Productions',
+    'Hotmello Lab': 'Hotmello Lab',
+  };
+
   // Set pre-selected service from URL query parameter on mount and when searchParams change
   useEffect(() => {
     const service = searchParams.get('service');
     if (service) {
-      const validService = bookingServices.some(s => s.title === service);
+      const normalizedService = serviceAliasMap[service] || service;
+      const validService = bookingServices.some(s => s.title === normalizedService);
       if (validService) {
-        setFormData(prev => ({ ...prev, service }));
+        setFormData(prev => ({ ...prev, service: normalizedService }));
       }
     }
   }, [searchParams]);
@@ -78,9 +88,9 @@ const Booking = () => {
     }
   };
 
-  const isProduction = formData.service === 'Production';
-  const isStudioRental = formData.service === 'Studio Rentals';
-  const isWedding = formData.service === 'Wedding';
+  const isProduction = formData.service === 'Production' || formData.service === 'Hotmello Productions';
+  const isStudioRental = formData.service === 'Studio Rentals' || formData.service === 'Hotmello Lab';
+  const isWedding = formData.service === 'Wedding' || formData.service === 'Hotmello Weddings';
 
   return (
     <div className="pt-24 pb-16 px-4 bg-absolute-black min-h-screen">
