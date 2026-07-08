@@ -107,7 +107,7 @@ const Production = () => {
     <Layout>
       <div className="relative pt-24 pb-16 px-4 bg-absolute-black min-h-screen">
         <div className="watermark display-font">PRODUCTION</div>
-        
+
         {/* UPDATED: Increased opacity to 50% and 30% for a proper visible glow */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[100vw] h-[80vh] bg-[#de660e]/50 blur-[140px] rounded-full" />
@@ -125,7 +125,13 @@ const Production = () => {
               >
                 Production Gallery
               </h1>
-              <div className="w-24 h-1" style={{ background: 'linear-gradient(90deg, var(--accent-production), #ff7f2c)' }}></div>
+              <div
+                className="w-24 h-1"
+                style={{
+                  background:
+                    "linear-gradient(90deg, var(--accent-production), #ff7f2c)",
+                }}
+              ></div>
             </div>
             <Link
               to="/booking?service=Hotmello Productions"
@@ -135,14 +141,14 @@ const Production = () => {
             </Link>
           </div>
           <p
-            className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-12"
+            className="font-sans text-zinc-400 text-center whitespace-nowrap mx-auto mb-12 text-sm md:text-base"
             data-aos="fade-up"
             data-aos-duration="300"
             data-aos-delay="50"
           >
-            A curated collection of our creative productions, each event captured with artistry and precision.
+            A curated collection of our creative productions, each event
+            captured with artistry and precision.
           </p>
-
           {loading ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
               {[...Array(8)].map((_, i) => (
@@ -186,14 +192,17 @@ const Production = () => {
                       const globalIndex = allImages.indexOf(img);
                       return (
                         <div
-                                  key={imgIndex}
-                                  className="break-inside-avoid overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover cursor-pointer"
-                                  data-aos="fade-up"
-                                  data-aos-duration="300"
-                                  data-aos-delay={(imgIndex % 12) * 30}
-                                  data-aos-offset="0"
-                                  onClick={() => openLightbox(globalIndex)}
-                                  style={{ animationDelay: `${(imgIndex % 12) * 0.1}s`, ['--glow']: 'rgba(222,102,14,0.12)' }}
+                          key={imgIndex}
+                          className="break-inside-avoid overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover cursor-pointer"
+                          data-aos="fade-up"
+                          data-aos-duration="300"
+                          data-aos-delay={(imgIndex % 12) * 30}
+                          data-aos-offset="0"
+                          onClick={() => openLightbox(globalIndex)}
+                          style={{
+                            animationDelay: `${(imgIndex % 12) * 0.1}s`,
+                            ["--glow"]: "rgba(222,102,14,0.12)",
+                          }}
                         >
                           <img
                             src={img}
@@ -252,25 +261,46 @@ const Production = () => {
                         className="lg:col-span-2 cursor-pointer"
                         data-aos="fade-right"
                         data-aos-duration="300"
-                        onClick={() => openLightbox(allImages.indexOf(featured))}
+                        onClick={() =>
+                          openLightbox(allImages.indexOf(featured))
+                        }
                       >
-                          <div className="relative overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]" style={{ animationDelay: `${(idx % 6) * 0.1}s`, ['--glow']: 'rgba(222,102,14,0.12)' }} onClick={() => openLightbox(allImages.indexOf(featured))}>
-                            <img
-                              src={featured}
-                              alt={`Featured ${category}`}
-                              className="w-full h-auto object-cover aspect-[4/3] hover:scale-105 transition-transform duration-700"
-                              loading="lazy"
-                            />
-                          </div>
+                        <div
+                          className="relative overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]"
+                          style={{
+                            animationDelay: `${(idx % 6) * 0.1}s`,
+                            ["--glow"]: "rgba(222,102,14,0.12)",
+                          }}
+                          onClick={() =>
+                            openLightbox(allImages.indexOf(featured))
+                          }
+                        >
+                          <img
+                            src={featured}
+                            alt={`Featured ${category}`}
+                            className="w-full h-auto object-cover aspect-[4/3] hover:scale-105 transition-transform duration-700"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
-                      <div className="grid grid-rows-2 gap-4" data-aos="fade-left" data-aos-duration="300">
+                      <div
+                        className="grid grid-rows-2 gap-4"
+                        data-aos="fade-left"
+                        data-aos-duration="300"
+                      >
                         {stacked.map((img, idx) => (
                           <div
                             key={idx}
                             className="cursor-pointer break-inside-avoid"
                             onClick={() => openLightbox(allImages.indexOf(img))}
                           >
-                            <div className="relative overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover transition-all duration-500 hover:scale-[1.02]" style={{ animationDelay: `${(idx % 6) * 0.1}s`, ['--glow']: 'rgba(222,102,14,0.12)' }}>
+                            <div
+                              className="relative overflow-hidden rounded-xl shadow-lg reveal-card gallery-card-hover transition-all duration-500 hover:scale-[1.02]"
+                              style={{
+                                animationDelay: `${(idx % 6) * 0.1}s`,
+                                ["--glow"]: "rgba(222,102,14,0.12)",
+                              }}
+                            >
                               <img
                                 src={img}
                                 alt={`Stacked ${idx + 1}`}

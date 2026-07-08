@@ -846,3 +846,64 @@ h1, h2, h3, h4, h5, h6 {
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
 }
+
+@theme {
+  --font-fonarto: "Fonarto", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-brand-orange: #de660e;
+}
+
+/* Base styles for the homepage cards */
+.home-card-transition {
+  transition: flex 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Responsive fixes for text size */
+@media (max-width: 768px) {
+  .font-fonarto {
+    font-size: 1.75rem; /* Better fit for mobile strips */
+  }
+}
+
+/* Ensure the absolute black background from the image */
+body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Hide scrollbar for the seamless look in the image */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.font-fonarto {
+  /* This prevents the text from creating horizontal scrollbars if it overflows slightly */
+  max-width: 100%;
+  display: inline-block;
+}
+
+.font-fonarto {
+  /* This helps the custom font render smoothly during flex transitions */
+  backface-visibility: hidden;
+  display: inline-block;
+  white-space: pre-line; /* Allows "CAMERA RENTALS" to wrap properly when narrow */
+}
+
+@theme {
+  --font-fonarto: "Fonarto", sans-serif;
+}
+
+/* Specific wide tracking for the PVT LTD label */
+.tracking-widest-branding {
+  letter-spacing: 0.6em;
+}
+
+/* Ensure navbar links are perfectly legible */
+nav a {
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Smooth transition for the dark banner */
+nav {
+  transition: background-color 0.4s ease;
+}

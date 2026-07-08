@@ -20,7 +20,7 @@ const Wedding = () => {
               >
                 Wedding Gallery
               </h1>
-              <div className="w-24 h-1" style={{ background: 'linear-gradient(90deg, var(--accent-wedding), rgba(130,230,73,0.6))' }}></div>
+              <div className="w-24 h-1" style={{ background: 'linear-gradient(90deg, var(--accent-wedding), #81e64799)' }}></div>
             </div>
             <Link
               to="/booking?service=Hotmello Weddings"

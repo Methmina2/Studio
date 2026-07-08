@@ -18,28 +18,30 @@ const Footer = () => {
             <a href="https://www.youtube.com/c/HotmelloLK/videos" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-[#de660e] transition"><FaYoutube size={20} /></a>
           </div>
         </div>
+        
         <div>
           <h4 className="font-sans text-xs uppercase tracking-wider text-zinc-500">Quick Links</h4>
           <ul className="mt-2 space-y-1 text-sm">
-            {servicesData.map((s) => {
-              // Map colorKey to brand hex
-              const colorMap = {
-                events: '#de660e',
-                weddings: '#82e649',
-                rentals: '#00FFFF',
-                studio: '#800080',
-              };
-              const hover = colorMap[s.colorKey] || '#de660e';
-              return (
-                <li key={s.id}>
-                  <Link to={s.enquireLink} className="quick-link transition" style={{ ['--hover-color']: hover }}>{s.title}</Link>
-                </li>
-              );
-            })}
-            <li><Link to="/about" className="text-zinc-500 hover:text-[#de660e] transition">About</Link></li>
-            <li><Link to="/contact" className="text-zinc-500 hover:text-[#de660e] transition">Contact</Link></li>
+            {/* 
+               Simplified Link logic: 
+               Removed the colorMap and the --hover-color variable.
+               Applied standard hover:text-[#de660e] to all items.
+            */}
+            {servicesData.map((s) => (
+              <li key={s.id}>
+                <Link 
+                  to={s.enquireLink} 
+                  className="text-zinc-500 hover:text-[#de660e] transition-colors duration-300"
+                >
+                  {s.title}
+                </Link>
+              </li>
+            ))}
+            <li><Link to="/about" className="text-zinc-500 hover:text-[#de660e] transition-colors duration-300">About</Link></li>
+            <li><Link to="/contact" className="text-zinc-500 hover:text-[#de660e] transition-colors duration-300">Contact</Link></li>
           </ul>
         </div>
+
         <div>
           <h4 className="font-sans text-xs uppercase tracking-wider text-zinc-500">Contact</h4>
           <address className="not-italic text-sm text-zinc-500 mt-2 space-y-1">
@@ -49,7 +51,8 @@ const Footer = () => {
           </address>
         </div>
       </div>
-        <div className="border-t border-zinc-900 mt-8 pt-6 text-center text-xs text-zinc-600">
+
+      <div className="border-t border-zinc-900 mt-8 pt-6 text-center text-xs text-zinc-600">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
           <span>&copy; 2026 HOTMELLO. All rights reserved.</span>
           <span className="hidden sm:inline">|</span>
