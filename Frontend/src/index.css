@@ -928,3 +928,29 @@ nav {
   font-family: 'Fonarto';
   src: url('/fonts/Fonarto.woff2') format('woff2');
 }
+
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+.font-service-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; 
+  text-transform: uppercase;
+  /* Balanced cinematic tracking */
+  letter-spacing: 0.25em; 
+  line-height: 1.2;
+  display: block;
+  /* Prevent text from ever touching the absolute edges */
+  max-width: 95%; 
+}
+
+.font-service-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
+}
