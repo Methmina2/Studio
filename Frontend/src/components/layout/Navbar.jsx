@@ -103,9 +103,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-[100] h-16 flex items-center justify-between px-6 md:px-10 bg-black/85 backdrop-blur-md border-b border-white/5">
       {/* LOGO */}
-      <Link to="/" className="flex flex-col items-start leading-none group">
-        <h1 className="text-white font-logo text-2xl tracking-tighter">HOTMELLO</h1>
-        <span className="text-[#de660e] font-extended text-[8px] tracking-[0.5em] font-black uppercase mt-1">PVT LTD</span>
+      <Link to="/" className="flex items-center">
+        <img src="/images/hotmello.png" alt="Hotmello" className="h-48 w-auto" />
       </Link>
 
       {/* NAV LINKS + DROPDOWN */}

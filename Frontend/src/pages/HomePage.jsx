@@ -103,12 +103,13 @@ const HomePage = () => {
     production: { top: "HOTMELLO", main: "PRODUCTIONS", link: "/production" },
     wedding: { top: "HOTMELLO", main: "WEDDINGS", link: "/wedding" },
     studiolabs: { top: "HOTMELLO", main: "LABS", link: "/studiolabs" },
-    rentals: { top: "HOTMELLO", main: "CAMERA RENTALS", link: "/rentals" }
+    rentals: { top: "HOTMELLO", main: "CAMERA\nRENTALS", link: "/rentals" }
   };
 
   useEffect(() => {
     const handleRes = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleRes);
+    
     const fetchServices = async () => {
       try {
         const res = await api.get('/services');
@@ -117,8 +118,11 @@ const HomePage = () => {
           .filter(s => order.includes(s.type))
           .sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
         setServices(filtered);
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error('Failed to fetch services:', err);
+      }
     };
+
     fetchServices();
     return () => window.removeEventListener('resize', handleRes);
   }, []);
@@ -135,32 +139,40 @@ const HomePage = () => {
             to={config.link}
             onMouseEnter={() => !isMobile && setHovered(index)}
             onMouseLeave={() => !isMobile && setHovered(null)}
-            className="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/5 last:border-0 transition-all duration-700 ease-in-out flex items-end justify-start"
+            className="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0 transition-all duration-700 ease-in-out flex items-end justify-start"
             style={{
-              // Balanced flex: Hovered expands enough for text, others shrink but stay visible
-              flex: isMobile ? 1 : (hovered === null ? 1 : isHovered ? 2.0 : 0.67),
+              // Hovered expands to take most of the screen, others shrink but stay visible
+              flex: isMobile ? 1 : (hovered === null ? 1 : isHovered ? 4.5 : 0.5),
             }}
           >
+            {/* Image Layer */}
             <img
               src={buildImageUrl(service.imageUrls?.[0])}
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${isHovered ? 'scale-110' : 'scale-100'}`}
+              alt={service.title}
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
+                isHovered ? 'scale-110' : 'scale-100'
+              }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-            <div className="relative z-10 mb-12 ml-4 md:ml-8 pointer-events-none pr-4 w-full">
-              {/* TOP LABEL */}
-              <p className="text-[#de660e] font-service-label text-[10px] md:text-[11px] font-bold mb-1 uppercase">
+            {/* Readability Overlays */}
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+
+            {/* Text Content */}
+            <div className="relative z-10 mb-16 ml-6 md:ml-12 pointer-events-none w-full pr-10">
+              {/* TOP LABEL - Margin bottom 0 or 1 to sit right on top of title */}
+              <p className="text-[#de660e] font-service-label text-[10px] md:text-[12px] mb-0 font-bold uppercase text-left">
                 {config.top}
               </p>
               
-              {/* MAIN TITLE - Refined sizes to fit column width */}
+              {/* MAIN TITLE */}
               <h2 
-                className={`text-white font-service-title transition-all duration-500
+                className={`text-white font-service-title transition-all duration-500 text-left
                 ${isMobile 
-                  ? 'text-2xl' 
+                  ? 'text-4xl' 
                   : (isHovered 
-                      ? 'text-2xl md:text-3xl lg:text-4xl' // Reduced from 6xl to prevent overflow
-                      : 'text-[11px] lg:text-xs opacity-70' // Slightly larger shrunk text
+                      ? 'text-4xl md:text-6xl lg:text-7xl tracking-tighter' 
+                      : 'text-lg md:text-xl lg:text-2xl opacity-60 tracking-tight'
                     )
                 }`}
               >
