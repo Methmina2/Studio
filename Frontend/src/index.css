@@ -907,3 +907,24 @@ nav a {
 nav {
   transition: background-color 0.4s ease;
 }
+/* src/index.css */
+@import "tailwindcss";
+
+@theme {
+  /* This matches the blocky, extended font in your titles */
+  --font-extended: "Syne", sans-serif;
+  /* This matches the stylized logo font */
+  --font-logo: "Audiowide", cursive;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Tracking utility for the orange "PVT LTD" and small "HOTMELLO" labels */
+.tracking-label {
+  letter-spacing: 0.5em;
+}
+
+/* Ensure Fonarto is still available if you use it elsewhere */
+@font-face {
+  font-family: 'Fonarto';
+  src: url('/fonts/Fonarto.woff2') format('woff2');
+}

@@ -85,10 +85,10 @@ const Rentals = () => {
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="font-serif text-4xl md:text-5xl font-bold text-white">
+              <h1 className="font-serif text-4xl md:text-5xl font-bold text-white uppercase">
                 Camera Rentals
               </h1>
-              <p className="font-sans text-zinc-400 mt-2">
+              <p className="font-sans text-zinc-400 mt-2 uppercase">
                 Select the equipment you need for your project.
               </p>
             </div>
@@ -98,19 +98,19 @@ const Rentals = () => {
                   <div className="flex items-center gap-4 text-white">
                     <FaShoppingCart className="text-[#00FFFF]" />
                     <span className="font-bold">{selectedItems.length}</span>
-                    <span className="text-zinc-400 text-sm">items</span>
+                    <span className="text-zinc-400 text-sm uppercase">items</span>
                     <span className="text-[#00FFFF] font-bold">LKR {totalFormatted}</span>
                   </div>
                   <div className="flex flex-wrap gap-3">
                     <button
                       onClick={clearSelection}
-                      className="border border-zinc-700 text-zinc-300 px-5 py-2 rounded-full hover:bg-white/5 transition"
+                      className="border border-zinc-700 text-zinc-300 px-5 py-2 rounded-full hover:bg-white/5 transition uppercase"
                     >
                       Clear Selection
                     </button>
                     <button
                       onClick={handleProceed}
-                      className="text-black px-6 py-2 rounded-full font-bold hover:bg-[#ff7f2c] transition"
+                      className="text-black px-6 py-2 rounded-full font-bold hover:bg-[#ff7f2c] transition uppercase"
                       style={{ background: '#de660e' }}
                     >
                       Proceed to Application
@@ -122,45 +122,45 @@ const Rentals = () => {
           </div>
 
           {loading ? (
-            <div className="text-zinc-400">Loading rentals...</div>
+            <div className="text-zinc-400 uppercase">Loading rentals...</div>
           ) : (
             <>
               {/* Category sections */}
               {sortedCategories.map((category, idx) => {
-            const items = groupedItems[category];
-            return (
-              <div key={category} className="mb-12">
-                {/* Category header */}
-                <div
-                  className="flex items-center gap-4 mb-6"
-                  data-aos="fade-right"
-                  data-aos-duration="250"
-                  data-aos-delay={idx * 20}
-                >
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">
-                    {category}
-                  </h2>
-                  <div className="flex-1 h-px bg-gradient-to-r from-[#de660e]/50 to-transparent"></div>
-                  <span className="text-sm text-zinc-500 font-sans">
-                    {items.length} items
-                  </span>
-                </div>
+                const items = groupedItems[category];
+                return (
+                  <div key={category} className="mb-12">
+                    {/* Category header */}
+                    <div
+                      className="flex items-center gap-4 mb-6"
+                      data-aos="fade-right"
+                      data-aos-duration="250"
+                      data-aos-delay={idx * 20}
+                    >
+                      <h2 className="font-serif text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">
+                        {category}
+                      </h2>
+                      <div className="flex-1 h-px bg-gradient-to-r from-[#de660e]/50 to-transparent"></div>
+                      <span className="text-sm text-zinc-500 font-sans uppercase">
+                        {items.length} items
+                      </span>
+                    </div>
 
-                {/* Cards grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {items.map((item) => (
-                    <RentalCard
-                      key={item._id || item.id}
-                      {...item}
-                      id={item._id || item.id}
-                      isSelected={selectedIds.includes(item._id || item.id)}
-                      onToggleSelect={toggleSelect}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+                    {/* Cards grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                      {items.map((item) => (
+                        <RentalCard
+                          key={item._id || item.id}
+                          {...item}
+                          id={item._id || item.id}
+                          isSelected={selectedIds.includes(item._id || item.id)}
+                          onToggleSelect={toggleSelect}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </>
           )}
         </div>

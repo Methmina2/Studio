@@ -108,7 +108,7 @@ const Production = () => {
       <div className="relative pt-24 pb-16 px-4 bg-absolute-black min-h-screen">
         <div className="watermark display-font">PRODUCTION</div>
 
-        {/* UPDATED: Increased opacity to 50% and 30% for a proper visible glow */}
+        {/* Background glow */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[100vw] h-[80vh] bg-[#de660e]/50 blur-[140px] rounded-full" />
           <div className="absolute -bottom-32 -left-32 w-[60vw] h-[60vh] bg-[#de660e]/30 blur-[120px] rounded-full" />
@@ -119,7 +119,7 @@ const Production = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
             <div>
               <h1
-                className="font-serif text-4xl md:text-5xl font-bold text-white mb-4"
+                className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 uppercase"
                 data-aos="fade-up"
                 data-aos-duration="300"
               >
@@ -135,13 +135,13 @@ const Production = () => {
             </div>
             <Link
               to="/booking?service=Hotmello Productions"
-              className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse"
+              className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse uppercase"
             >
               Book Now
             </Link>
           </div>
           <p
-            className="font-sans text-zinc-400 text-center whitespace-nowrap mx-auto mb-12 text-sm md:text-base"
+            className="font-sans text-zinc-400 text-center whitespace-nowrap mx-auto mb-12 text-sm md:text-base uppercase"
             data-aos="fade-up"
             data-aos-duration="300"
             data-aos-delay="50"
@@ -172,7 +172,7 @@ const Production = () => {
                       {category}
                     </h2>
                     <div className="flex-1 h-px bg-gradient-to-r from-[#de660e]/50 to-transparent"></div>
-                    <span className="text-sm text-zinc-500 font-sans">
+                    <span className="text-sm text-zinc-500 font-sans uppercase">
                       {images.length} photos
                     </span>
                     {albumLink && (
@@ -180,7 +180,7 @@ const Production = () => {
                         href={albumLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-[#de660e] hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-[#de660e]/20 hover:border-[#de660e]/50"
+                        className="flex items-center gap-1.5 text-sm text-[#de660e] hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-[#de660e]/20 hover:border-[#de660e]/50 uppercase"
                       >
                         <FaFacebook className="w-3.5 h-3.5" />
                         View Album
@@ -238,7 +238,7 @@ const Production = () => {
                       {category}
                     </h2>
                     <div className="flex-1 h-px bg-gradient-to-r from-[#de660e]/50 to-transparent"></div>
-                    <span className="text-sm text-zinc-500 font-sans">
+                    <span className="text-sm text-zinc-500 font-sans uppercase">
                       {images.length} photos
                     </span>
                     {albumLink && (
@@ -246,7 +246,7 @@ const Production = () => {
                         href={albumLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-[#de660e] hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-[#de660e]/20 hover:border-[#de660e]/50"
+                        className="flex items-center gap-1.5 text-sm text-[#de660e] hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-[#de660e]/20 hover:border-[#de660e]/50 uppercase"
                       >
                         <FaFacebook className="w-3.5 h-3.5" />
                         View Album
@@ -311,7 +311,7 @@ const Production = () => {
                           </div>
                         ))}
                         {stacked.length === 1 && (
-                          <div className="bg-studio-surface rounded-xl border border-zinc-900 flex items-center justify-center text-zinc-500 text-sm aspect-[4/3]">
+                          <div className="bg-studio-surface rounded-xl border border-zinc-900 flex items-center justify-center text-zinc-500 text-sm aspect-[4/3] uppercase">
                             + more
                           </div>
                         )}

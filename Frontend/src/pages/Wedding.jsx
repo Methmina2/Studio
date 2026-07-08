@@ -14,7 +14,7 @@ const Wedding = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-8">
             <div>
               <h1
-                className="font-serif text-4xl md:text-5xl font-bold text-white mb-4"
+                className="font-serif text-4xl md:text-5xl font-bold text-white mb-4 uppercase"
                 data-aos="fade-up"
                 data-aos-duration="300"
               >
@@ -24,13 +24,13 @@ const Wedding = () => {
             </div>
             <Link
               to="/booking?service=Hotmello Weddings"
-              className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse"
+              className="px-6 py-3 bg-[#de660e] text-black font-semibold rounded-full hover:bg-[#ff7f2c] transition whitespace-nowrap btn-pulse uppercase"
             >
               Book Now
             </Link>
           </div>
           <p
-            className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-12"
+            className="font-sans text-zinc-400 text-center max-w-2xl mx-auto mb-12 uppercase"
             data-aos="fade-up"
             data-aos-duration="300"
             data-aos-delay="50"
