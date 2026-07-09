@@ -10,6 +10,7 @@ const defaultServiceMetadata = {
   wedding: {
     colorKey: 'weddings',
     image: '/images/wedding.png',
+    titleImage: '/images/2_-_Weddings.png',
     badge: 'Most Requested',
     title: 'Hotmello Weddings',
     locationText: 'On-site & Studio',
@@ -22,6 +23,7 @@ const defaultServiceMetadata = {
   production: {
     colorKey: 'events',
     image: '/images/event.png',
+    titleImage: '/images/1_-_Productions.png',
     badge: 'Corporate & Social',
     title: 'Hotmello Productions',
     locationText: 'On-site',
@@ -33,6 +35,7 @@ const defaultServiceMetadata = {
   },
   rentals: {
     colorKey: 'rentals',
+    titleImage: '/images/4_-_Camera_Rentals.png',
     image: '/images/rental-camara.png',
     badge: 'Pro-Grade Gear',
     title: 'Hotmello Rental',
@@ -44,6 +47,7 @@ const defaultServiceMetadata = {
     price: 'From $150/day',
   },
   studiolabs: {
+    titleImage: '/images/3_-_Labs.png',
     colorKey: 'studio',
     image: '/images/studio.png',
     badge: 'Fully Equipped',
@@ -76,6 +80,7 @@ const ServicesGrid = () => {
             id: service._id || service.type || service.title,
             title: service.title || defaults.title || 'Service',
             image: imageUrl,
+            titleImage: defaults.titleImage || service.titleImage || '',
             badge: defaults.badge || service.badge || '',
             price: service.price || defaults.price || '',
             locationText: defaults.locationText || service.locationText || '',
@@ -140,6 +145,7 @@ const ServicesGrid = () => {
                 key={service.id}
                 title={service.title}
                 image={service.image}
+                titleImage={service.titleImage}
                 badge={service.badge}
                 price={price}
                 location={service.locationText}
@@ -171,6 +177,7 @@ const ServicesGrid = () => {
                 key={service.id}
                 title={service.title}
                 image={service.image}
+                titleImage={service.titleImage}
                 badge={service.badge}
                 price={price}
                 location={service.locationText}

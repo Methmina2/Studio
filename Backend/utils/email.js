@@ -90,6 +90,74 @@ exports.sendBookingConfirmed = async (booking) => {
   });
 };
 
+exports.sendRentalConfirmation = async (rental) => {
+  const itemsHtml = rental.items.map(item => `
+    <tr>
+      <td style="padding: 10px; border-bottom: 1px solid #333;">${item.name}</td>
+      <td style="padding: 10px; border-bottom: 1px solid #333; text-align: right;">LKR ${item.pricePerDay.toLocaleString()}</td>
+    </tr>
+  `).join('');
+
+  const totalPrice = rental.items.reduce((sum, item) => sum + item.pricePerDay, 0);
+
+  await sendEmail({
+    from: `"Hotmello Studio" <${process.env.EMAIL_USER}>`,
+    to: rental.email,
+    subject: `Rental Application Received - ID: ${rental.orderId}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #000; color: #fff; border-radius: 12px; border: 1px solid #de660e;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h1 style="color: #de660e; margin-bottom: 5px;">Hotmello Studio</h1>
+          <p style="color: #888; font-size: 12px; text-transform: uppercase;">Equipment Rental Receipt</p>
+        </div>
+
+        <div style="background: #111; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+          <p style="margin: 0; font-size: 14px; color: #aaa;">Tracking Order ID:</p>
+          <h2 style="margin: 5px 0; color: #fff; letter-spacing: 2px;">${rental.orderId}</h2>
+        </div>
+
+        <p>Hi ${rental.fullName},</p>
+        <p>We have received your application. Your request is currently <strong>Pending</strong> until availability is confirmed.</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+          <thead>
+            <tr style="color: #de660e; font-size: 12px; text-transform: uppercase;">
+              <th style="text-align: left; padding: 10px; border-bottom: 2px solid #de660e;">Item</th>
+              <th style="text-align: right; padding: 10px; border-bottom: 2px solid #de660e;">Daily Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td style="padding: 15px 10px; font-weight: bold;">Total Daily Rate</td>
+              <td style="padding: 15px 10px; font-weight: bold; text-align: right; color: #de660e; font-size: 18px;">LKR ${totalPrice.toLocaleString()}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div style="border-left: 4px solid #de660e; padding-left: 15px; margin: 25px 0;">
+          <p style="margin: 5px 0;"><strong>📅 Collection:</strong> ${new Date(rental.collectionDate).toDateString()} at ${rental.collectionTime}</p>
+          <p style="margin: 5px 0;"><strong>📅 Return:</strong> ${new Date(rental.returnDate).toDateString()} at ${rental.returnTime}</p>
+        </div>
+
+        <h3 style="color: #de660e;">Next Steps & Payment</h3>
+        <ul style="padding-left: 20px; color: #ccc; line-height: 1.6;">
+          <li>Wait for our team to contact you via <strong>${rental.contactNumber}</strong>.</li>
+          <li>Bring your <strong>Original NIC or Passport</strong> for identity verification.</li>
+          <li>Payment can be settled via Bank Transfer or Cash at the studio.</li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 40px; border-top: 1px solid #222; padding-top: 20px;">
+          <p style="font-size: 14px; color: #de660e;"><strong>Hotmello Hotline: +94 70 177 0163</strong></p>
+          <p style="font-size: 11px; color: #555;">No. 38, Uyandana, Sri Lanka, 60000</p>
+        </div>
+      </div>
+    `,
+  });
+};
+
 exports.sendBookingCanceled = async (booking) => {
   const packageDetails = booking.package || 'Not specified';
   await sendEmail({

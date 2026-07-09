@@ -7,12 +7,14 @@ const {
   createRental,
   updateRental,
   deleteRental,
+  applyForRental
 } = require('../controllers/rental.Controller');
 
 const router = express.Router();
 
 // Public routes
 router.get('/', getRentals);
+router.post('/apply', applyForRental);
 
 // Admin routes
 router.get('/:id', auth, getRental);

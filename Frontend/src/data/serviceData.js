@@ -3,6 +3,7 @@ export const servicesData = [
     id: 2,
     colorKey: 'events',
     image: '/images/event.png',
+    titleImage: '/images/1_-_Productions.png',
     badge: 'Corporate & Social',
     title: 'Hotmello Productions',
     locationText: 'On-site',
@@ -20,6 +21,7 @@ export const servicesData = [
     id: 1,
     colorKey: 'weddings',
     image: '/images/wedding.png',
+    titleImage: '/images/2_-_Weddings.png',
     badge: 'Most Requested',
     price: 'From $1,200',
     title: 'Hotmello Weddings',
@@ -37,6 +39,7 @@ export const servicesData = [
   {
     id: 3,
     colorKey: 'rentals',
+    titleImage: '/images/4_-_Camera_Rentals.png',
     image: '/images/rental-camara.png',
     badge: 'Pro-Grade Gear',
     price: 'From $150/day',
@@ -54,6 +57,7 @@ export const servicesData = [
   },
   {
     id: 4,
+    titleImage: '/images/3_-_Labs.png',
     colorKey: 'studio',
     image: '/images/studio.png',
     badge: 'Fully Equipped',

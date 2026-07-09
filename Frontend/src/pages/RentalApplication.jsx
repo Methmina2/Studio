@@ -28,8 +28,7 @@ const RentalApplication = () => {
     regulatoryAck: false,
     noModificationAck: false,
     declarationAck: false,
-    nicImage: null, // keep NIC image
-    // signatureImage removed
+    nicImage: null,
   });
 
   const handleChange = (e) => {
@@ -43,21 +42,37 @@ const RentalApplication = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  // ---- NEW async handleSubmit ----
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       ...formData,
       items: selectedItems.map(item => ({
         id: item.id,
         name: item.name,
-        category: item.category,
         pricePerDay: item.pricePerDay,
       })),
     };
-    console.log('Application submitted:', payload);
-    alert('Application submitted! We will contact you shortly.');
-    navigate('/rentals');
+
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+      const response = await fetch(`${baseUrl}/rentals/apply`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert('Application submitted! Check your email for details.');
+        navigate('/rentals');
+      }
+    } catch (err) {
+      alert('Submission failed. Please try again.');
+    }
   };
+  // ---------------------------------
 
   const totalPrice = selectedItems.reduce((sum, item) => sum + item.pricePerDay, 0);
   const totalFormatted = totalPrice.toLocaleString('en-US');
@@ -340,7 +355,6 @@ const RentalApplication = () => {
                   />
                   <p className="text-xs text-zinc-500 mt-1">Clear image of your National Identity Card or Passport</p>
                 </div>
-                {/* Signature image field removed */}
               </div>
             </section>
 
@@ -367,4 +381,3 @@ const RentalApplication = () => {
 };
 
 export default RentalApplication;
-

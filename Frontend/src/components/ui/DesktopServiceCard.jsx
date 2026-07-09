@@ -5,6 +5,7 @@ import { FaMapPin, FaClock, FaUsers } from 'react-icons/fa';
 const ServiceCard = ({
   title,
   image,
+  titleImage,
   badge,
   price,
   location,
@@ -84,9 +85,17 @@ const ServiceCard = ({
       {/* Content Area – smaller padding/fonts on mobile */}
       <div className="p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col flex-1">
         <div className="flex justify-between items-start gap-1 sm:gap-2">
-          <h3 className="font-serif text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wider leading-tight">
-            {title}
-          </h3>
+          {titleImage ? (
+            <img
+              src={titleImage}
+              alt={title}
+              className="h-8 sm:h-12 md:h-16 lg:h-20 object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+            />
+          ) : (
+            <h3 className="font-serif text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold text-white uppercase tracking-wider leading-tight">
+              {title}
+            </h3>
+          )}
           {rating && (
             <span className="font-sans text-[10px] sm:text-xs md:text-sm text-zinc-400 flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
               <span className="text-[#de660e]">★</span> {rating}
