@@ -18,7 +18,6 @@ const HomePage = () => {
   useEffect(() => {
     const handleRes = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleRes);
-    
     const fetchServices = async () => {
       try {
         const res = await api.get('/services');
@@ -27,11 +26,8 @@ const HomePage = () => {
           .filter(s => order.includes(s.type))
           .sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
         setServices(filtered);
-      } catch (err) {
-        console.error('Failed to fetch services:', err);
-      }
+      } catch (err) { console.error(err); }
     };
-
     fetchServices();
     return () => window.removeEventListener('resize', handleRes);
   }, []);
@@ -55,24 +51,28 @@ const HomePage = () => {
           >
             <img
               src={buildImageUrl(service.imageUrls?.[0])}
-              alt={service.title}
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
-                isHovered ? 'scale-110' : 'scale-100'
+              alt=""
+              className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ${
+                isHovered ? 'brightness-110 contrast-110' : 'brightness-75'
               }`}
             />
-
+            
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-            {/* Title container – flush left with uniform size for ALL cards */}
+            {/* Title Container – now truly flush left */}
             <div className="relative z-10 w-full flex justify-start items-start pointer-events-none pl-0 md:pl-0">
               <img 
                 src={config.titleImg} 
                 alt={config.alt}
-                className={`transition-all duration-500 object-left object-contain 
-                  h-10 md:h-16  /* ← SAME height for all cards, reduced from earlier values */
-                  ${isHovered ? 'opacity-100 scale-105' : 'opacity-60 scale-100'}
-                `}
+                className={`transition-all duration-500 object-left object-contain w-auto
+                  ${isMobile 
+                    ? 'h-16' 
+                    : (isHovered 
+                        ? 'h-24 lg:h-32 opacity-100' 
+                        : 'h-10 lg:h-12 opacity-60'
+                      )
+                  }`}
               />
             </div>
           </Link>

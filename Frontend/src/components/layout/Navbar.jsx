@@ -16,12 +16,12 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-[100] h-16 flex items-center justify-between pl-2 md:pl-4 pr-4 md:pr-8 bg-black/85 backdrop-blur-md border-b border-white/5 overflow-visible">
       
-      {/* LOGO: massive — overflows navbar */}
+      {/* LOGO: now even bigger, overflows navbar */}
       <Link to="/" className="flex items-center group">
         <img 
           src="/images/hotmello.png" 
           alt="Hotmello Logo" 
-          className="h-28 md:h-36 w-auto object-contain transition-transform group-hover:scale-105"
+          className="h-32 md:h-40 w-auto object-contain transition-transform group-hover:scale-105"
         />
       </Link>
 
