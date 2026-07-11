@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar – with full developer names and handle */}
+      {/* Bottom bar – credits tooltip with two lines */}
       <div className="border-t border-zinc-900 mt-8 pt-6 text-center text-xs text-zinc-600">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
           <span>&copy; 2026 HOTMELLO. All rights reserved.</span>
@@ -62,12 +62,21 @@ const Footer = () => {
             Admin
           </Link>
           <span>|</span>
-          <span className="text-zinc-500 text-[10px] tracking-wider">
-            Developed by <span className="text-white/70">Nexor</span> ·{' '}
-            <span className="text-white/60">Chamalka Ekanayake</span>
-            <span className="text-[#de660e]/70"> #Thaniya</span>
-            <span className="text-zinc-500"> &amp; </span>
-            <span className="text-white/60">Methmina Senadeera</span>
+
+          {/* Hover‑reveal credits – two lines inside tooltip */}
+          <span className="relative group inline-block cursor-default">
+            <span className="text-zinc-500 group-hover:text-zinc-400 transition-colors">
+              Developed by
+            </span>
+            <span className="absolute left-1/2 -translate-x-1/2 top-full mt-1 min-w-[200px] max-w-[90vw] bg-absolute-black/95 border border-zinc-800 rounded-lg px-3 py-2 text-[10px] tracking-wider opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10 pointer-events-none text-center leading-relaxed">
+              <span className="text-white/70">Nexor</span>
+              <span className="text-zinc-500 mx-1">·</span>
+              <br />
+              <span className="text-white/60">Chamalka Ekanayaka</span>
+              <span className="text-[#de660e]/80"> #Thaniya</span>
+              <br />
+              <span className="text-white/60">Methmina Senadeera</span>
+            </span>
           </span>
         </div>
       </div>
