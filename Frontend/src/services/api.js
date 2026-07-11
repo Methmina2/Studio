@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://studio-production-f5a8.up.railway.app',
+  baseURL: import.meta.env.VITE_API_URL || 'studio-production-f5a8.up.railway.app',
 });
 
 // Request interceptor to add token
