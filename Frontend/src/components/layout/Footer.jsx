@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar – now includes developer credits */}
+      {/* Bottom bar – with full developer names and handle */}
       <div className="border-t border-zinc-900 mt-8 pt-6 text-center text-xs text-zinc-600">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
           <span>&copy; 2026 HOTMELLO. All rights reserved.</span>
@@ -63,7 +63,11 @@ const Footer = () => {
           </Link>
           <span>|</span>
           <span className="text-zinc-500 text-[10px] tracking-wider">
-            Developed by <span className="text-white/70">Nexor</span> · Chamalka &amp; Methmina
+            Developed by <span className="text-white/70">Nexor</span> ·{' '}
+            <span className="text-white/60">Chamalka Ekanayake</span>
+            <span className="text-[#de660e]/70"> #Thaniya</span>
+            <span className="text-zinc-500"> &amp; </span>
+            <span className="text-white/60">Methmina Senadeera</span>
           </span>
         </div>
       </div>
