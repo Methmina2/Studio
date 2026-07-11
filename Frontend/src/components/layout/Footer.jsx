@@ -22,11 +22,6 @@ const Footer = () => {
         <div>
           <h4 className="font-sans text-xs uppercase tracking-wider text-zinc-500">Quick Links</h4>
           <ul className="mt-2 space-y-1 text-sm">
-            {/* 
-               Simplified Link logic: 
-               Removed the colorMap and the --hover-color variable.
-               Applied standard hover:text-[#de660e] to all items.
-            */}
             {servicesData.map((s) => (
               <li key={s.id}>
                 <Link 
@@ -52,6 +47,7 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Bottom bar – now includes developer credits */}
       <div className="border-t border-zinc-900 mt-8 pt-6 text-center text-xs text-zinc-600">
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
           <span>&copy; 2026 HOTMELLO. All rights reserved.</span>
@@ -65,6 +61,10 @@ const Footer = () => {
           <Link to="/admin/login" className="text-[#de660e] hover:text-white transition font-medium">
             Admin
           </Link>
+          <span>|</span>
+          <span className="text-zinc-500 text-[10px] tracking-wider">
+            Developed by <span className="text-white/70">Nexor</span> · Chamalka &amp; Methmina
+          </span>
         </div>
       </div>
     </footer>
