@@ -35,6 +35,7 @@ const AdminServices = () => {
       imageUrls: service.imageUrls || [],
     });
     setSelectedImage(null);
+    // Show current image preview (if any)
     setImagePreview(service.imageUrls?.[0] ? buildImageUrl(service.imageUrls[0]) : '');
   };
 
@@ -130,7 +131,7 @@ const AdminServices = () => {
                       onChange={handleImageChange}
                       className="w-full text-sm text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#de660e] file:text-black hover:file:bg-[#ff7f2c]"
                     />
-                    <p className="text-xs text-zinc-500">Upload a new image for this service card.</p>
+                    <p className="text-xs text-zinc-500">Upload a new image for this service card. It will replace the current one.</p>
                   </div>
                   <div className="flex gap-3">
                     <button
