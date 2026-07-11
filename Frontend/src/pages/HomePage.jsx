@@ -45,7 +45,7 @@ const HomePage = () => {
 
   return (
     <div className="relative pt-16 md:pt-0 h-screen w-full overflow-hidden bg-black flex flex-col md:flex-row">
-      {/* Hamburger – moved to the LEFT side, above the navbar */}
+      {/* Hamburger */}
       <button
         onClick={toggleMenu}
         className="fixed top-4 left-4 z-[200] text-white text-2xl md:hidden focus:outline-none"
@@ -62,65 +62,32 @@ const HomePage = () => {
         onClick={closeMenu}
       />
 
-      {/* Slide panel – slides in from the LEFT now */}
+      {/* Slide panel */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-absolute-black border-r border-white/10 z-[160] transform transition-transform duration-300 ease-in-out ${
           menuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full p-6 pt-20">
-          <h2 className="text-white text-xl font-serif mb-8">Menu</h2>
+          <h2 className="text-white text-xl font-serif mb-8 uppercase tracking-widest">Menu</h2>
           <nav className="flex flex-col gap-4">
-            <Link
-              to="/"
-              className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition"
-              onClick={closeMenu}
-            >
-              HOME
-            </Link>
+            <Link to="/" className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition" onClick={closeMenu}>HOME</Link>
             <div className="relative">
-              <span className="text-white text-sm font-extended font-bold tracking-wider block mb-2">
-                SERVICES
-              </span>
+              <span className="text-white text-sm font-extended font-bold tracking-wider block mb-2">SERVICES</span>
               <div className="flex flex-col gap-2 ml-4 border-l border-white/10 pl-4">
                 {dropdownLinks.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className="text-white/70 text-xs font-extended tracking-wider hover:text-[#de660e] transition"
-                    onClick={closeMenu}
-                  >
-                    {item.name}
-                  </Link>
+                  <Link key={item.name} to={item.path} className="text-white/70 text-xs font-extended tracking-wider hover:text-[#de660e] transition" onClick={closeMenu}>{item.name}</Link>
                 ))}
               </div>
             </div>
-            <Link
-              to="/about"
-              className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition"
-              onClick={closeMenu}
-            >
-              CREW
-            </Link>
-            <Link
-              to="/contact"
-              className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition"
-              onClick={closeMenu}
-            >
-              CONTACT
-            </Link>
-            <Link
-              to="/booking"
-              className="mt-4 bg-[#de660e] text-black text-sm font-extended font-bold tracking-wider px-4 py-2 rounded-full text-center hover:bg-[#ff7f2c] transition"
-              onClick={closeMenu}
-            >
-              BOOK NOW
-            </Link>
+            <Link to="/about" className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition" onClick={closeMenu}>CREW</Link>
+            <Link to="/contact" className="text-white text-sm font-extended font-bold tracking-wider hover:text-[#de660e] transition" onClick={closeMenu}>CONTACT</Link>
+            <Link to="/booking" className="mt-4 bg-[#de660e] text-black text-sm font-extended font-bold tracking-wider px-4 py-2 rounded-full text-center hover:bg-[#ff7f2c] transition" onClick={closeMenu}>BOOK NOW</Link>
           </nav>
         </div>
       </div>
 
-      {/* Service cards – unchanged */}
+      {/* Service cards */}
       {services.map((service, index) => {
         const isHovered = !isMobile && hovered === index;
         const config = serviceConfig[service.type];
@@ -131,9 +98,9 @@ const HomePage = () => {
             to={config.link}
             onMouseEnter={() => !isMobile && setHovered(index)}
             onMouseLeave={() => !isMobile && setHovered(null)}
-            className="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0 transition-all duration-700 ease-in-out flex flex-col justify-end pb-20"
+            className="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0 transition-all duration-700 ease-in-out flex flex-col justify-end pb-12 md:pb-20"
             style={{
-              flex: isMobile ? 1 : (hovered === null ? 1 : isHovered ? 2.2 : 0.6),
+              flex: isMobile ? 1 : (hovered === null ? 1 : isHovered ? 2.2 : 0.67),
             }}
           >
             <img
@@ -147,13 +114,14 @@ const HomePage = () => {
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-            <div className="relative z-10 w-full flex justify-start pl-0 md:pl-0 pointer-events-none">
+            {/* Title Container - Adjusted Padding (pl-2 and md:pl-4) to move text left */}
+            <div className="relative z-10 w-full flex justify-start pl-2 md:pl-4 pointer-events-none">
               <img 
                 src={config.titleImg} 
                 alt={config.alt}
-                className={`transition-all duration-500 object-left object-contain w-auto
+                className={`transition-all duration-500 object-left object-contain
                   ${isMobile 
-                    ? 'h-16' 
+                    ? 'h-10 sm:h-12 max-w-[90%]' 
                     : (isHovered 
                         ? 'h-24 lg:h-32 opacity-100' 
                         : 'h-10 lg:h-12 opacity-60'
