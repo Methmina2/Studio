@@ -20,6 +20,7 @@ createInitialAdmin();
 createInitialCrew();
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security middleware
 // Allow cross-origin resource loading for uploaded images (needed when frontend runs on a different port)
