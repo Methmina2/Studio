@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+// Use the environment variable, but fallback to the correct backend port (5000)
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'studio-production-f5a8.up.railway.app',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
 });
 
 // Request interceptor to add token

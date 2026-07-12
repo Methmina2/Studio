@@ -9,16 +9,46 @@ const HomePage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Static service configuration – this defines the title images and links
   const serviceConfig = {
-    production: { titleImg: "/images/1_-_Productions.png", link: "/production", alt: "Productions" },
-    wedding: { titleImg: "/images/2_-_Weddings.png", link: "/wedding", alt: "Weddings" },
-    studiolabs: { titleImg: "/images/3_-_Labs.png", link: "/studiolabs", alt: "Labs" },
-    rentals: { titleImg: "/images/4_-_Camera_Rentals.png", link: "/rentals", alt: "Camera Rentals" }
+    production: {
+      titleImg: "/images/1_-_Productions.png",
+      link: "/production",
+      alt: "Productions",
+      fallbackText: "PRODUCTIONS"
+    },
+    wedding: {
+      titleImg: "/images/2_-_Weddings.png",
+      link: "/wedding",
+      alt: "Weddings",
+      fallbackText: "WEDDINGS"
+    },
+    studiolabs: {
+      titleImg: "/images/3_-_Labs.png",
+      link: "/studiolabs",
+      alt: "Labs",
+      fallbackText: "LABS"
+    },
+    rentals: {
+      titleImg: "/images/4_-_Camera_Rentals.png",
+      link: "/rentals",
+      alt: "Camera Rentals",
+      fallbackText: "CAMERA RENTALS"
+    }
   };
+
+  // Fallback data in case the API call fails
+  const fallbackServices = [
+    { _id: '1', type: 'production' },
+    { _id: '2', type: 'wedding' },
+    { _id: '3', type: 'studiolabs' },
+    { _id: '4', type: 'rentals' }
+  ];
 
   useEffect(() => {
     const handleRes = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleRes);
+
     const fetchServices = async () => {
       try {
         const res = await api.get('/services');
@@ -27,9 +57,13 @@ const HomePage = () => {
           .filter(s => order.includes(s.type))
           .sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type));
         setServices(filtered);
-      } catch (err) { console.error(err); }
+      } catch (err) {
+        console.error('Failed to fetch services – using fallback data', err);
+        setServices(fallbackServices);
+      }
     };
     fetchServices();
+
     return () => window.removeEventListener('resize', handleRes);
   }, []);
 
@@ -87,10 +121,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Service cards */}
-      {services.map((service, index) => {
+      {/* Service Cards – using services or fallback */}
+      {(services.length > 0 ? services : fallbackServices).map((service, index) => {
         const isHovered = !isMobile && hovered === index;
         const config = serviceConfig[service.type];
+        if (!config) return null; // safety
 
         return (
           <Link
@@ -98,35 +133,48 @@ const HomePage = () => {
             to={config.link}
             onMouseEnter={() => !isMobile && setHovered(index)}
             onMouseLeave={() => !isMobile && setHovered(null)}
-            className="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0 transition-all duration-700 ease-in-out flex flex-col justify-end pb-12 md:pb-20"
+            className={`relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-0 transition-all duration-700 ease-in-out flex flex-col justify-end ${
+              isMobile ? 'pb-28' : 'pb-20'
+            }`}
             style={{
               flex: isMobile ? 1 : (hovered === null ? 1 : isHovered ? 2.2 : 0.67),
             }}
           >
+            {/* Background image */}
             <img
-              src={buildImageUrl(service.imageUrls?.[0])}
+              src={service.imageUrls?.[0] ? buildImageUrl(service.imageUrls[0]) : ''}
               alt=""
               className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-1000 ${
                 isHovered ? 'brightness-110 contrast-110' : 'brightness-75'
               }`}
+              onError={(e) => { e.target.style.display = 'none'; }}
             />
-            
+
             <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
 
-            {/* Title Container - Adjusted Padding (pl-2 and md:pl-4) to move text left */}
-            <div className="relative z-10 w-full flex justify-start pl-2 md:pl-4 pointer-events-none">
-              <img 
-                src={config.titleImg} 
+            {/* Title image – with increased heights and fallback text */}
+            <div className="relative z-10 w-full flex justify-start pl-2 md:pl-4 pointer-events-none overflow-visible">
+              <img
+                src={config.titleImg}
                 alt={config.alt}
-                className={`transition-all duration-500 object-left object-contain
-                  ${isMobile 
-                    ? 'h-10 sm:h-12 max-w-[90%]' 
-                    : (isHovered 
-                        ? 'h-24 lg:h-32 opacity-100' 
-                        : 'h-10 lg:h-12 opacity-60'
+                className={`transition-all duration-500 object-left-top object-contain w-auto
+                  ${isMobile
+                    ? 'h-16 sm:h-20'
+                    : (isHovered
+                        ? 'h-28 lg:h-36 opacity-100'
+                        : 'h-14 lg:h-16 opacity-60'
                       )
                   }`}
+                onError={(e) => {
+                  // If title image fails, show fallback text
+                  e.target.style.display = 'none';
+                  const parent = e.target.parentNode;
+                  const fallback = document.createElement('div');
+                  fallback.className = 'text-white text-2xl font-bold tracking-wider uppercase';
+                  fallback.textContent = config.fallbackText;
+                  parent.appendChild(fallback);
+                }}
               />
             </div>
           </Link>
